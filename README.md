@@ -1,6 +1,6 @@
 This repository contains the WikiSem500 dataset described in "Automated Generation of Multilingual Clusters for Word Embedding Evaluation" by Philip Blair, Yuval Merhav, and Joel Barry.
 
-The test groups themselves can be found in `wiki-sem-500.tar.gz`. The structure of the archive is as follows:
+The test groups themselves can be found in `wiki-sem-500.tar.gz` (`wiki-sem-500-tokenized.tar.gz` is pre-tokenized). The structure of the archive is as follows:
 
 ```
 wiki-sem-500
