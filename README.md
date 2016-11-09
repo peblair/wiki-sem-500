@@ -47,3 +47,50 @@ RMS
 HMHS
 ```
 
+
+## Running the Evaluation Script
+To run the evaluation script, navigate to this directory in a virtualenv
+and run `install_dependencies.py` . **Note:** At the time of writing, `polyglot`
+(one of the dependencies) has a [bug][polyglot-bug] which prevents embedding
+files from loading in Python 3. Until this is patched, only Python 2 will work
+with this script.
+
+Once the dependencies are installed, unpack the *tokenized* dataset at a location
+of your choice (say, `dataset/`). A word2vec binary embedding can then be evaluated as
+follows:
+
+```
+(venv2) $ ./evaluate.py -w2v vectors.bin -d dataset/en -b
+```
+
+GloVe and Gensim embeddings are also supported. Here is the full help message for
+`evaluate.py`:
+
+```
+usage: evaluate.py [-h] (-w2v WORD2VEC | -gv GLOVE | -gs GENSIM) -d DATASET
+                   [-b] [-p] [-goog] [-ci CASE_INSENSITIVE]
+
+Scoring script for outlier detection
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -w2v WORD2VEC, --word2vec WORD2VEC
+                        Specify word2vec embedding file
+  -gv GLOVE, --glove GLOVE
+                        Specify GloVe embedding file
+  -gs GENSIM, --gensim GENSIM
+                        Specify Gensim embedding file
+  -d DATASET, --dataset DATASET
+                        Path to outlier dataset
+  -b, --binary          Indicates that the embedding file is binary (ignored
+                        for GloVe files)
+  -p, --phrases         Indicates that the embedding file supports phrases
+  -goog, --google-news  Indicates that the embeddings have been normalized in
+                        the same fashion as the Google News word2vec
+                        embeddings
+  -ci CASE_INSENSITIVE, --case-insensitive CASE_INSENSITIVE
+                        Indicates whether the embeddings are all lowercased
+```
+
+
+[polyglot-bug]: https://github.com/aboSamoor/polyglot/issues/76
