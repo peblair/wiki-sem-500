@@ -16,7 +16,7 @@
 import abc
 import numpy as np
 import operator
-import polyglot.mapping
+from .lib.polyglot import mapping as polyglot_mapping
 import re
 
 from six.moves import xrange, reduce
@@ -114,10 +114,10 @@ class Embedding(object):
             return average
 
             
-class WrappedEmbedding(Embedding, polyglot.mapping.Embedding):
-    """Convenience wrapper around polyglot.mapping.Embedding"""
+class WrappedEmbedding(Embedding, polyglot_mapping.Embedding):
+    """Convenience wrapper around polyglot_mapping.Embedding"""
     def __init__(self, vocabulary, vectors, **kwargs):
-        polyglot.mapping.Embedding.__init__(self, vocabulary, vectors)
+        polyglot_mapping.Embedding.__init__(self, vocabulary, vectors)
         Embedding.__init__(self, **kwargs)
 
     def in_vocabulary(self, w):

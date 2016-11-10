@@ -17,8 +17,9 @@
 import unittest
 
 from src.tests import test_embedding, test_evaluator, test_test_group
+from src.lib.polyglot.mapping.tests import test_expansion, test_embeddings
 
-tests = unittest.TestSuite([test_embedding.suite, test_evaluator.suite, test_test_group.suite])
+tests = unittest.TestSuite([test_embedding.suite, test_evaluator.suite, test_test_group.suite, test_embeddings.suite] + test_expansion.suites)
 
 if __name__ == "__main__":
     runner = unittest.TextTestRunner()

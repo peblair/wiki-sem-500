@@ -50,10 +50,8 @@ HMHS
 
 ## Running the Evaluation Script
 To run the evaluation script, navigate to this directory in a virtualenv
-and run `install_dependencies.py` . **Note:** At the time of writing, `polyglot`
-(one of the dependencies) has a [bug][polyglot-bug] which prevents embedding
-files from loading in Python 3. Until this is patched, only Python 2 will work
-with this script.
+and run `install_dependencies.py` . The embeddings are driven by a partial
+fork of [`polyglot`][polyglot].
 
 Once the dependencies are installed, unpack the *tokenized* dataset at a location
 of your choice (say, `dataset/`). A word2vec binary embedding can then be evaluated as
@@ -93,4 +91,4 @@ optional arguments:
 ```
 
 
-[polyglot-bug]: https://github.com/aboSamoor/polyglot/issues/76
+[polyglot]: https://github.com/aboSamoor/polyglot/

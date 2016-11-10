@@ -19,8 +19,6 @@ import pip
 import sys
 
 dependencies = [
-    # Word embeddings
-    "polyglot==16.7.4",
     # Polyglot peer dependency
     "six==1.10.0"
 ]
