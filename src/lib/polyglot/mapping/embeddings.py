@@ -4,9 +4,9 @@
 """Defines classes related to mapping vocabulary to n-dimensional points."""
 
 from io import open
-import logging
 from os import path
 import tarfile
+import sys
 
 import numpy as np
 from numpy import float32
@@ -22,7 +22,6 @@ from .base import CountedVocabulary, OrderedVocabulary
 from ..utils import _open, _decode
 
 
-logger = logging.getLogger(__name__)
 
 
 class Embedding(object):
@@ -201,8 +200,8 @@ class Embedding(object):
         except TypeError as e:
           parts = line.strip().split()
         except Exception as e:
-          logger.warning("We ignored line number {} because of erros in parsing"
-                          "\n{}".format(line_no, e))
+          sys.stderr.write("We ignored line number {} because of errors in parsing"
+                          "\n{}\n".format(line_no, e))
           continue
         # We differ from Gensim implementation.
         # Our assumption that a difference of one happens because of having a
@@ -213,8 +212,8 @@ class Embedding(object):
           word, weights = parts[:2], list(map(float32, parts[2:]))
           word = u" ".join(word)
         else:
-          logger.warning("We ignored line number {} because of unrecognized "
-                          "number of columns {}".format(line_no, parts[:-layer1_size]))
+          sys.stderr.write("We ignored line number {} because of unrecognized "
+                          "number of columns {}\n".format(line_no, parts[:-layer1_size]))
           continue
         index = line_no
         words.append(word)
@@ -237,10 +236,8 @@ class Embedding(object):
     """
     vocabulary = None
     if fvocab is not None:
-      logger.info("loading word counts from %s" % (fvocab))
       vocabulary = Embedding.from_word2vec_vocab(fvocab)
 
-    logger.info("loading projection weights from %s" % (fname))
     if binary:
       words, vectors = Embedding._from_word2vec_binary(fname)
     else:
@@ -263,8 +260,8 @@ class Embedding(object):
         except TypeError as e:
           parts = line.strip().split()
         except Exception as e:
-          logger.warning("We ignored line number {} because of erros in parsing"
-                          "\n{}".format(line_no, e))
+          sys.stderr.write("We ignored line number {} because of erros in parsing\n"
+                          "\n{}\n".format(line_no, e))
           continue
         # We deduce layer1_size because GloVe files have no header.
         if layer1_size is None:
@@ -275,8 +272,8 @@ class Embedding(object):
         if len(parts) == layer1_size + 1:
           word, weights = parts[0], list(map(float32, parts[1:]))
         else:
-          logger.warning("We ignored line number {} because of unrecognized "
-                          "number of columns {}".format(line_no, parts[:-layer1_size]))
+          sys.stderr.write("We ignored line number {} because of unrecognized "
+                          "number of columns {}\n".format(line_no, parts[:-layer1_size]))
           continue
         index = line_no
         words.append(word)

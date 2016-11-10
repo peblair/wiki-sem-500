@@ -5,9 +5,6 @@ from .base import OrderedVocabulary
 from collections import defaultdict
 from six import iteritems
 import re
-import logging
-
-logger = logging.getLogger(__name__)
 
 class VocabExpander(OrderedVocabulary):
   def __init__(self, vocabulary, formatters, strategy):
@@ -76,11 +73,7 @@ class VocabExpander(OrderedVocabulary):
     words_added = self.aux_word_id.keys()
     old_no = len(self._vocab)
     new_no = len(self.aux_word_id)
-    logger.info("We have {} original words.".format(old_no))
-    logger.info("Added {} new words.".format(new_no))
-    logger.info("The new total number of words is {}".format(len(self)))
-    logger.debug(u"Words added\n{}\n".format(u" ".join(words_added)))
-
+    
 
 class CaseExpander(VocabExpander):
   def __init__(self, vocabulary, strategy='most_frequent'):
